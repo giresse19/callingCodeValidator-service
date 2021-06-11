@@ -1,0 +1,19 @@
+version: '3.7'
+services:
+
+  ##########################
+  # countryNumber   #
+  ##########################
+  countryNumber:
+    image: openjdk:11.0.11-jdk
+    container_name: countryNumber
+    entrypoint: /bin/bash
+    command: -c "java -jar /app/*.jar"
+    tty: true
+    restart: always
+    ports:
+      - "8080:8080"
+    environment:
+      - "SPRING_PROFILES_ACTIVE=docker"
+    volumes:
+      - ./target/:/app/
