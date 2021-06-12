@@ -1,9 +1,10 @@
 package com.rimiTest.CallCodeAndNumber.service;
 
-import com.rimiTest.CallCodeAndNumber.dto.CountryCallCodeAndNumberDto;
+import com.rimiTest.CallCodeAndNumber.persistence.model.request.CountryCallCodeAndNumberRequest;
+import com.rimiTest.CallCodeAndNumber.persistence.model.response.CountryCallCodeAndNumberResponse;
 
+// todo: change names to possibly countryCodeService etc
 public interface CountryCallCodeAndNumberService {
-  CountryCallCodeAndNumberDto getCountryByCountryCallCodeAndNumber(CountryCallCodeAndNumberDto countryCallCodeAndNumberDto);
-  boolean isValidCountryCodeAndNumber(String countryCallCodeAndNumber);
-    
+  CountryCallCodeAndNumberResponse getCountryByPhoneNumber(CountryCallCodeAndNumberRequest countryCallCodeAndNumberRequest);
+
 }
