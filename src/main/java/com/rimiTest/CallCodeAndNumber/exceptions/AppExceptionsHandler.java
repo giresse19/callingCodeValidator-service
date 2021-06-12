@@ -2,7 +2,6 @@ package com.rimiTest.CallCodeAndNumber.exceptions;
 
 import com.rimiTest.CallCodeAndNumber.persistence.model.ErrorMessages;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,13 +20,6 @@ import java.util.Objects;
 @Slf4j
 @ControllerAdvice
 public class AppExceptionsHandler extends ResponseEntityExceptionHandler {
-
-    // 400
-    @ExceptionHandler(value = {DataIntegrityViolationException.class, MyBadRequestException.class})
-    protected final ResponseEntity<Object> handleBadRequest(final RuntimeException ex, final WebRequest request) {
-        final String bodyOfResponse = ErrorMessages.INVALID_INPUT.getErrorMessage();
-        return handleExceptionInternal(ex, bodyOfResponse, new HttpHeaders(), HttpStatus.FORBIDDEN, request);
-    }
 
     // 404
     @ExceptionHandler({CountryCallCodeAndNumberServiceException.class})

@@ -43,7 +43,6 @@ public class CountryCallCodeAndNumberController {
             consumes = {MediaType.APPLICATION_JSON_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE}
     )
-    @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<CountryCallCodeAndNumberResponse> getCountryByCallCodeAndNumber(@Valid @RequestBody CountryCallCodeAndNumberRequest countryCallCodeAndNumberRequest) {
         CountryCallCodeAndNumberResponse responseResult = new CountryCallCodeAndNumberResponse();
 

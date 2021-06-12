@@ -28,12 +28,10 @@ public class CountryCallCodeAndNumberDAO {
     }
 
     /**
-     * Returns an optional hashmap containing country call-codes as key and  countries as values.
+     * Returns an optional hashmap containing country call-codes prefix as key and  countries as values.
      *
-     * @return  An optional hashmap containing call-codes and countries, retrieved from data source
-     *
-     * @throws CountryCallCodeAndNumberServiceException
-     *          If null is returned
+     * @return An optional hashmap containing call-codes and countries, retrieved from data source
+     * @throws CountryCallCodeAndNumberServiceException If null is returned
      */
     public Map<String, String> getCallCodeAndNumberMap() {
         return Optional.ofNullable(countryCallCodeAndNumberMap).orElseGet(() -> {
@@ -44,10 +42,9 @@ public class CountryCallCodeAndNumberDAO {
     }
 
     /**
-     * Fetches a list of call codes and countries Object
-     * Puts them into a hastTable(Hashmap) for easy traversing in the future.
-     * Method is being run upon re-start of spring boot server.
-     *
+     * Fetches a list of country prefix call-codes and countries, and populate a JSONObject.
+     * Puts them into a hastTable(Hashmap) for easy lookup in the future.
+     * Method is called everytime app re-starts.
      */
     public void initFetchedAPIData() {
         log.info("######### Fetching API data #########");
@@ -61,7 +58,6 @@ public class CountryCallCodeAndNumberDAO {
             fetchedCallCodeAndCountryResponse = fetchedCallCodeAndCountryResponse.getJSONObject("results");
             JSONArray fetchedCallingCodeAndCountryResponseArr = fetchedCallCodeAndCountryResponse.getJSONArray("bindings");
 
-            // Since  thread synchronization is not needed, Hashmap is chosen over a HashTable.
             countryCallCodeAndNumberMap = new HashMap<>();
 
             fetchedCallingCodeAndCountryResponseArr.forEach(el -> {
