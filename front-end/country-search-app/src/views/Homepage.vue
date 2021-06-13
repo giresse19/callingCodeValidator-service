@@ -68,7 +68,6 @@ export default {
       };
 
       const response = await fetch(`${config.BASE_URL}/${config.PHONE_NUMBER}`, config.fetchOptionsPost(JSON.stringify(formData)));
-      console.log(response);
       if (response.ok) {
         const data = await response.json()
         await this.$router.push({
