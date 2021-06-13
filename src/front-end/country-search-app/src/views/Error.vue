@@ -17,8 +17,7 @@
               <v-card-title>Searched results</v-card-title>
               <v-card-text>
                 <span style="color: red">Error, No country found.
-                  Please enter a valid country code and phone number.
-                </span>
+                  Please enter a valid country code and phone number.</span>
 
               </v-card-text>
 

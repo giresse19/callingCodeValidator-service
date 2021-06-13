@@ -97,7 +97,7 @@ $ mvn test
 
 * front-end:
 ```sh
-cd callingCodeValidator-service/front-end/country-search-app
+cd callingCodeValidator-service/src/front-end/country-search-app
 $ yarn install
 $ yarn serve
 ```
