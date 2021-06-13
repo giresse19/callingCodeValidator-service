@@ -79,7 +79,7 @@ $ mvn spring-boot:run
 ```
 * To test APP: 
 ```sh
-cd callingCodeValidator-service
+cd calling-code-validator-service
 $ mvn test
 ```
 
