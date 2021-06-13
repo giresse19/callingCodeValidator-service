@@ -74,7 +74,7 @@ To run this locally, you need Java 11, Maven for B.E and npm, yarn for F.E.
 
 * To start APP: 
 ```sh
-cd callingCodeValidator-service
+cd calling-code-validator-service
 $ mvn spring-boot:run
 ```
 * To test APP: 
@@ -97,7 +97,7 @@ $ mvn test
 
 * front-end:
 ```sh
-cd callingCodeValidator-service/src/frontend/country-search-app
+cd calling-code-validator-service/src/frontend/country-search-app
 $ yarn install
 $ yarn serve
 ```
