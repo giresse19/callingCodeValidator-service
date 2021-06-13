@@ -16,7 +16,7 @@
             >
               <v-card-title>Searched results</v-card-title>
               <v-card-text>
-               <span style="color: green">Successfully found country:</span> {{ data.country }}
+                <span style="color: green">Successfully found country:</span> {{ data.country }}
               </v-card-text>
 
               <v-card-actions>
@@ -37,22 +37,18 @@
 
 <script>
 export default {
-  data(){
-    return{
-       data : {},
+  data() {
+    return {
+      data: {},
     }
   },
   mounted() {
     this.data = this.$route.params.data;
   },
-  methods:{
-    goBack(){
+  methods: {
+    goBack() {
       return this.$router.go(-1)
     }
   }
 }
 </script>
-
-<style>
-
-</style>

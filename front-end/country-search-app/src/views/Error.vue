@@ -36,13 +36,8 @@
 </template>
 <script>
 export default {
-  data(){
-    return{
-      data : {},
-    }
-  },
-    methods:{
-    goBack(){
+  methods: {
+    goBack() {
       return this.$router.go(-1)
     }
   }
