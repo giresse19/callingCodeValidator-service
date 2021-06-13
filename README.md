@@ -1,13 +1,3 @@
-## Project setup
-```
-
-```
-
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
-
 ##  country-search-app
  Simple spring boot app(micro-service), which returns a country upon the country call-code and phone number. Client-side is 
  build with vue.js. 
