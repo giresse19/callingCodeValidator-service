@@ -23,8 +23,7 @@
                       required
                       :rules="[
                         () => !!callCodeAndNumber || 'Phone number can not be empty.',
-                        () => /(\d{11,31})/.test(callCodeAndNumber) || 'Number of digits must be between 11 and 31'
-                    ]"
+                   ]"
                   >
                   </v-text-field>
                 </v-form>
