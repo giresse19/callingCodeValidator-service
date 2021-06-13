@@ -3,6 +3,8 @@ package com.rimiTest.CallCodeAndNumber.persistence.DAO;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.rimiTest.CallCodeAndNumber.exceptions.FetchAndParseAPIDataException;
+import com.rimiTest.CallCodeAndNumber.persistence.model.ErrorMessages;
 import com.rimiTest.CallCodeAndNumber.utils.AppConstants;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -16,7 +18,7 @@ import java.util.Map;
 @Repository
 @RequiredArgsConstructor
 @Slf4j
-public class CountryCallCodeAndNumberDAO {
+public class CountryCodeAndCountryDAO {
     private final RestTemplateBuilder restTemplateBuilder;
     private final ObjectMapper objectMapper;
 
@@ -29,17 +31,21 @@ public class CountryCallCodeAndNumberDAO {
     }
 
     /**
-     * Fetches a list of country prefix call-codes and countries, and populate a JSONObject.
+     * Fetches and parse a list of country codes and countries.
      * Puts them into a hastTable(Hashmap) for easy lookup in the future.
      * Method is called everytime app re-starts.
+     *
+     * @throws FetchAndParseAPIDataException This prevents micro-service from start-up hence exposing the failures for easier debugging and bringing certainty,
+     *                                       since without this data micro-service is pretty much useless.
      */
-    public void initFetchedAPIData() {
+    public void fetchAndParseAPIData() {
         try {
             String json = restTemplateBuilder.build()
                     .getForObject(new URL(DATA_RESOURCE_URL).toURI(), String.class);
             JsonNode jsonNode = objectMapper.readTree(json);
             JsonNode resultsNode = jsonNode.get("results");
             ArrayNode bindings = (ArrayNode) resultsNode.get("bindings");
+            log.debug("Fetched API data");
 
             bindings.forEach(r -> {
                 String key = r.get("cc").get(VALUE).asText();
@@ -49,8 +55,7 @@ public class CountryCallCodeAndNumberDAO {
                                 val : countryCallCodeAndNumberMap.get(key).concat(", ".concat(val)));
             });
         } catch (Exception e) {
-            log.error("Error while fetching CallCodeAndCountryResponse", e);
-            // todo throw exception... to fail app start-up
+            throw new FetchAndParseAPIDataException(ErrorMessages.API_DATA_NOT_FETCHED.getErrorMessage());
         }
     }
 }

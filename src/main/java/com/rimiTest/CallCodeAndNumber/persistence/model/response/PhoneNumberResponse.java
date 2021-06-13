@@ -6,6 +6,6 @@ import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
-public class CountryCallCodeAndNumberResponse {
+public class PhoneNumberResponse {
     private String country;
 }

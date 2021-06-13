@@ -17,13 +17,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-public class CountryCallCodeAndNumberIntegrationTest {
+public class PhoneNumberIntegrationTest {
 
     @Autowired
     private MockMvc mockMvc;
 
     @Test
-    public void testGetCountryByCountryCallCodeAndNumberIsInvalid() throws Exception {
+    public void getCountryByPhoneNumber_shouldReturnErrorMessage_whenPhoneNumberIsInvalid() throws Exception {
         mockMvc.perform(
                 post("/api/countryPrefixAndNumber").contentType(MediaType.APPLICATION_JSON)
                         .content("{\"callCodeAndNumber\":\"76767\"}"))
@@ -32,7 +32,7 @@ public class CountryCallCodeAndNumberIntegrationTest {
     }
 
     @Test
-    public void testGetCountryByCountryCallCodeAndNumberIsValid() throws Exception {
+    public void getCountryByPhoneNumber_shouldReturnCountry_whenPhoneNumberIsValid() throws Exception {
         mockMvc.perform(post("/api/countryPrefixAndNumber").contentType(MediaType.APPLICATION_JSON)
                 .content("{\"callCodeAndNumber\":\"+37259620860\"}")).andExpect(status().isOk())
                 .andExpect(jsonPath("country").value("Estonia"));
