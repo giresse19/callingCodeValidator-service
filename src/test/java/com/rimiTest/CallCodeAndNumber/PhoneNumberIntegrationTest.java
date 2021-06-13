@@ -56,6 +56,7 @@ public class PhoneNumberIntegrationTest {
         mockMvc.perform(post("/api/countryPrefixAndNumber").contentType(MediaType.APPLICATION_JSON)
                 .content("{\"callCodeAndNumber\":\"+1 (340) 703-6671\"}")).andExpect(status().isOk())
                 .andExpect(jsonPath("country").value("United States Virgin Islands"));
+
     }
 
 }
