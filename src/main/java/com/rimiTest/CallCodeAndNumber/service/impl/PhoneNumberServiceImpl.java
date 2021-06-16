@@ -28,10 +28,16 @@ public class PhoneNumberServiceImpl implements PhoneNumberService {
      * longest possible country code length is 5.
      *
      * @param phoneNumberRequest user input (country-code and phone number).
-     * @return PhoneNumberResponse containing retrieved country from the hashTable or null if no country found.
+     *
+     * @return PhoneNumberResponse Returns all possible country(ies)
+     * which has the call-code(key) on the hashTable or null if no country found.
+     * e.g a number such as: +1242671676767, could still be either +1 340(the bahamas) or +1(US and Canada), base on
+     * call codes check.
      */
     @Override
     public PhoneNumberResponse getCountryByPhoneNumber(PhoneNumberRequest phoneNumberRequest) {
+        StringBuilder allPossibleCountries = new StringBuilder();
+
         String processedNumber = processRawNumber(phoneNumberRequest.getCallCodeAndNumber());
         validateNumber(processedNumber);
 
@@ -43,13 +49,14 @@ public class PhoneNumberServiceImpl implements PhoneNumberService {
             country = countryCodeAndCountryDAO.getCountryByCountryCode(PLUS_SIGN + countryCode);
 
             if (country != null) {
-                break;
+                if(allPossibleCountries.length() > 0 ) allPossibleCountries.append(", ");
+                allPossibleCountries.append(country);
             }
 
             countryCodeLength--;
         }
 
-        return new PhoneNumberResponse(country);
+        return new PhoneNumberResponse(allPossibleCountries.toString());
     }
 
     private String processRawNumber(String rawNumber) {

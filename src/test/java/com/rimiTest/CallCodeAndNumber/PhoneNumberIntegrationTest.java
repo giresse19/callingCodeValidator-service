@@ -50,9 +50,8 @@ public class PhoneNumberIntegrationTest {
                 .andExpect(jsonPath("country").value("Algeria"));
 
         mockMvc.perform(post("/api/countryPrefixAndNumber").contentType(MediaType.APPLICATION_JSON)
-                .content("{\"callCodeAndNumber\":\"+1 (340) 703-6671\"}")).andExpect(status().isOk())
-                .andExpect(jsonPath("country").value("United States Virgin Islands"));
-
+                .content("{\"callCodeAndNumber\":\"893-6671676767\"}")).andExpect(status().isNotFound())
+                .andExpect(jsonPath("country").doesNotExist());
     }
 
 }

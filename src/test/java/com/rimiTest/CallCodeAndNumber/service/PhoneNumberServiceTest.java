@@ -69,17 +69,6 @@ public class PhoneNumberServiceTest {
         when(countryCodeAndCountryDAO.getCountryByCountryCode("+3")).thenReturn("USA");
         PhoneNumberResponse response = phoneNumberService.getCountryByPhoneNumber(phoneNumberRequest);
         assertEquals("USA", response.getCountry());
-
     }
 
-    @Test
-    public void getCountryByPhoneNumber_shouldReturnNullValue_whenCountryCodeNotFound() {
-        String number = "893-6671676767";
-        PhoneNumberRequest phoneNumberRequest = new PhoneNumberRequest();
-        phoneNumberRequest.setCallCodeAndNumber(number);
-        when(countryCodeAndCountryDAO.getCountryByCountryCode("89")).thenReturn(null);
-        PhoneNumberResponse response = phoneNumberService.getCountryByPhoneNumber(phoneNumberRequest);
-        assertNull(response.getCountry());
-
-    }
 }
