@@ -16,8 +16,7 @@
             >
               <v-card-title>Searched results</v-card-title>
               <v-card-text>
-                <span style="color: red">Error, No country found.
-                  Please enter a valid country code and phone number.</span>
+                <span style="color: red">Error, {{ message }}</span>
 
               </v-card-text>
 
@@ -37,11 +36,34 @@
   </v-container>
 </template>
 <script>
+import config from "@/config/config";
+
 export default {
+  data() {
+    return {
+      response: {},
+      message: "",
+    }
+  },
+  mounted() {
+    this.response = this.$route.params.response;
+    this.getMessage();
+  },
   methods: {
     goBack() {
       return this.$router.go(-1)
+    },
+    async getMessage() {
+      this.response = this.$route.params.response;
+
+      if (this.response.status === 404) {
+        this.message = config.NOT_FOUND_MESSAGE
+      } else {
+        const data = await this.response.json();
+        this.message = data.message
+      }
     }
-  }
+  },
+
 }
 </script>

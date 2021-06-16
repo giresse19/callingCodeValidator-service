@@ -66,22 +66,22 @@ export default {
         'callCodeAndNumber': this.callCodeAndNumber,
       };
 
-      const response = await fetch(`${config.BASE_URL}/${config.PHONE_NUMBER}`, config.fetchOptionsPost(JSON.stringify(formData)));
+      const response = await fetch(`${config.BASE_URL}/${config.PHONE_NUMBER}`, config.fetchOptionsPost(JSON.stringify(formData)))
+
       if (response.ok) {
-        const data = await response.json()
+        const data = await response.json();
         await this.$router.push({
           name: 'success',
           params: {data}
         });
-      }
-
-      else if(response.status === 400) {
+      } else {
         await this.$router.push({
           name: 'error',
+          params: {response}
         });
       }
-
     }
+
   }
 }
 </script>

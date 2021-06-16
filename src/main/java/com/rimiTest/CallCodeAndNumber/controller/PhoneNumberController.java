@@ -27,7 +27,7 @@ public class PhoneNumberController {
     )
     public ResponseEntity<PhoneNumberResponse> getCountryByCallCodeAndNumber(@Valid @RequestBody PhoneNumberRequest phoneNumberRequest) {
         PhoneNumberResponse searchedResponse = phoneNumberService.getCountryByPhoneNumber(phoneNumberRequest);
-        if (searchedResponse.getCountry() == null) return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        if (searchedResponse.getCountry() == null) return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 
         return ResponseEntity.ok(searchedResponse);
     }
